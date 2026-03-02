@@ -1,0 +1,28 @@
+name: Verify Probity Test Vectors
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      # No dependencies required: verifier + harness are dependency-free by design.
+      - name: Run verification vectors
+        run: |
+          python tools/run_verification_vectors.py
