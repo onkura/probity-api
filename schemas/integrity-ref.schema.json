@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://probity.dev/schemas/integrity-ref.schema.json",
+  "title": "Probity Integrity Reference",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["hash_algo", "hash_encoding", "digest"],
+  "properties": {
+    "hash_algo": {
+    "$ref": "https://probity.dev/schemas/enums/hash-algorithms.json"
+    },
+    "hash_encoding": {
+      "type": "string",
+      "enum": ["hex", "base64url"]
+    },
+    "digest": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Digest encoded as declared by hash_encoding."
+    },
+    "canonical_serialization_id": {
+    "$ref": "https://probity.dev/schemas/enums/canonicalization-ids.json"
+    }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "hash_encoding": { "const": "hex" } }, "required": ["hash_encoding"] },
+      "then": {
+        "properties": {
+          "digest": {
+            "type": "string",
+            "pattern": "^[0-9a-f]+$"
+          }
+        }
+      }
+    },
+    {
+      "if": { "properties": { "hash_encoding": { "const": "base64url" } }, "required": ["hash_encoding"] },
+      "then": {
+        "properties": {
+          "digest": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]+$"
+          }
+        }
+      }
+    }
+  ]
+}

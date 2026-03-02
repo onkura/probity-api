@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://probity.dev/schemas/enums/hash-algorithms.json",
+  "title": "Hash Algorithm Enumeration",
+  "type": "string",
+  "enum": ["sha256"],
+  "description": "Hash algorithms permitted for probity-json:v1."
+}

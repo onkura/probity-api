@@ -1,0 +1,17 @@
+# OS artifacts
+.DS_Store
+__MACOSX/
+*.swp
+
+# Python / venv
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+
+# Editors
+.vscode/
+.idea/
+
+# Git metadata should never be committed in repo content
+.git/

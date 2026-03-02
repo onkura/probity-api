@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://probity.dev/schemas/enums/canonicalization-ids.json",
+  "title": "Canonicalization Identifier Enumeration",
+  "type": "string",
+  "enum": ["jcs:rfc8785"],
+  "description": "Canonical serialization identifiers recognized by probity-json:v1."
+}

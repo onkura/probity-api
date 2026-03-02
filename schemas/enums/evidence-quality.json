@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://probity.dev/schemas/enums/evidence-quality.json",
+  "title": "Evidence Quality Enumeration (PRE)",
+  "type": "string",
+  "enum": ["verified", "incomplete", "late", "unverified"],
+  "description": "Evidence quality values valid inside a PRE. `absent` is reserved for operational signals where no PRE exists."
+}

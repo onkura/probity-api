@@ -1,0 +1,17 @@
+{
+  "record_id": "tv-07",
+  "verification_time": "1970-01-01T00:00:00Z",
+  "status": "unverified",
+  "status_reasons": [
+    "unknown_canonical_id"
+  ],
+  "canonical_serialization_id": "jcs:unknown",
+  "integrity": {
+    "hash_algo": "sha256",
+    "hash_encoding": "hex",
+    "computed_digest": "",
+    "expected_digest": "343dd03af0a817ecc90a33c281367976fc335fec54bdf9c9561277a3c37cfa8a",
+    "match": false
+  },
+  "evidence_quality": "unverified"
+}

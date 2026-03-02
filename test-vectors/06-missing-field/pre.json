@@ -1,0 +1,23 @@
+{
+  "record_id": "tv-06",
+  "spec_version": "probity-v1",
+  "encoding_id": "probity-json:v1",
+  "schema_version": "decision-snapshot:v1",
+  "canonical_serialization_id": "jcs:rfc8785",
+  "created_at": "2026-03-02T00:00:00Z",
+  "evidence_quality": "incomplete",
+  "integrity": {
+    "hash_algo": "sha256",
+    "hash_encoding": "hex",
+    "digest": "39e2d51988a7c48554d99a3b3c39aca286de8a064daf1d97fb4a45f242fae593",
+    "canonical_serialization_id": "jcs:rfc8785"
+  },
+  "snapshot_ref": {
+    "uri": "snapshot.json",
+    "content_hash": {
+      "hash_algo": "sha256",
+      "hash_encoding": "hex",
+      "digest": "8706801aaa61ebf2fd2d8582380bbc5d466c9e31ac49589053b2242577bbe728"
+    }
+  }
+}

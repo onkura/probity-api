@@ -1,0 +1,1 @@
+{"intent":{"action_params":{"qty":1,"target":"item:123"},"action_type":"purchase"},"perception":{"inputs":[{"ref":"input:1","type":"user_text"}]},"responsibility":{"actor_id":"agent:demo","actor_type":"agent","authority_scope":{"allow":["purchase"]}},"selection_basis":{"heuristic_tags":["lowest_cost_within_policy"]}}

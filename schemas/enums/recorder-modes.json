@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://probity.dev/schemas/enums/recorder-modes.json",
+  "title": "Recorder Mode Enumeration",
+  "type": "string",
+  "enum": ["evidence_best_effort", "evidence_required", "evidence_blocking"],
+  "description": "Operational recording mode (Layer 3). Not the same as embedded vs referenced snapshot carriage."
+}

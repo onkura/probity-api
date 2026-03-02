@@ -1,0 +1,30 @@
+{
+  "record_id": "urn:probity:record:cd8f3c0d-2ff4-4e14-93d9-0baf5d8b48a1",
+  "spec_version": "probity-v1",
+  "encoding_id": "probity-json:v1",
+  "schema_version": "decision-snapshot:v1",
+  "canonical_serialization_id": "jcs:rfc8785",
+  "created_at": "2026-03-02T14:20:05Z",
+  "evidence_quality": "incomplete",
+  "integrity": {
+    "hash_algo": "sha256",
+    "hash_encoding": "hex",
+    "digest": "4444444444444444444444444444444444444444444444444444444444444444",
+    "canonical_serialization_id": "jcs:rfc8785"
+  },
+  "snapshot_ref": {
+    "uri": "urn:artifact:probity-snapshots/2026/03/02/cd8f3c0d.json",
+    "content_hash": {
+      "hash_algo": "sha256",
+      "hash_encoding": "hex",
+      "digest": "5555555555555555555555555555555555555555555555555555555555555555"
+    },
+    "content_type": "application/json",
+    "size_bytes": 2178
+  },
+  "extensions": {
+    "com.probity.example": {
+      "note": "External snapshot referenced; envelope still carries canonical integrity digest."
+    }
+  }
+}

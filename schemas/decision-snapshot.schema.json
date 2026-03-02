@@ -1,0 +1,116 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://probity.dev/schemas/decision-snapshot.schema.json",
+  "title": "Decision Snapshot (decision-snapshot:v1)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["perception", "responsibility", "intent", "selection_basis", "outcome"],
+  "properties": {
+    "perception": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "inputs": { "type": "array", "items": { "type": "object", "additionalProperties": true } },
+        "evidence_refs": { "type": "array", "items": { "type": "object", "additionalProperties": true } },
+        "env": { "type": "object", "additionalProperties": true },
+        "extensions": { "$ref": "#/$defs/extensions" }
+      }
+    },
+
+    "responsibility": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["actor_id", "actor_type", "authority_scope"],
+      "properties": {
+        "actor_id": { "type": "string", "minLength": 1 },
+        "actor_type": { "type": "string", "enum": ["human", "service", "agent", "delegated"] },
+        "authority_scope": {
+          "type": "object",
+          "description": "Permission scope the system believed applied. Shape is intentionally open.",
+          "additionalProperties": true
+        },
+        "extensions": { "$ref": "#/$defs/extensions" }
+      }
+    },
+
+    "intent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["action_type", "action_params"],
+      "properties": {
+        "action_type": { "type": "string", "minLength": 1 },
+        "action_params": {
+          "type": "object",
+          "description": "Action parameters. Shape is intentionally open.",
+          "additionalProperties": true
+        },
+        "extensions": { "$ref": "#/$defs/extensions" }
+      }
+    },
+
+    "selection_basis": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "score_signals": { "type": "object", "additionalProperties": true },
+        "policy_refs": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+        "heuristic_tags": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+        "extensions": { "$ref": "#/$defs/extensions" }
+      },
+      "anyOf": [
+        { "required": ["score_signals"] },
+        { "required": ["policy_refs"] },
+        { "required": ["heuristic_tags"] }
+      ]
+    },
+
+    "outcome": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["observed_result", "result_refs", "observed_at"],
+      "properties": {
+        "observed_result": {
+          "type": "string",
+          "enum": ["succeeded", "failed", "unknown"]
+        },
+        "result_refs": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "observed_at": { "$ref": "#/$defs/timestamp" },
+        "extensions": { "$ref": "#/$defs/extensions" }
+      }
+    },
+
+    "human_approval": {
+      "type": "object",
+      "description": "Optional. Shape intentionally open (approval id, approver, timestamp, etc.).",
+      "additionalProperties": true
+    },
+
+    "lineage_refs": {
+      "type": "array",
+      "items": { "$ref": "https://probity.dev/schemas/lineage-link.schema.json" }
+    },
+
+    "raw_capture_policy": { "type": "boolean" },
+
+    "evidence_quality": {
+    "$ref": "https://probity.dev/schemas/enums/evidence-quality.json"
+    },
+
+    "extensions": { "$ref": "#/$defs/extensions" }
+  },
+
+  "$defs": {
+    "timestamp": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d{1,9})?Z$"
+    },
+    "extensions": {
+      "type": "object",
+      "propertyNames": { "pattern": "^[A-Za-z0-9_]+(\\.[A-Za-z0-9_]+)+$" },
+      "additionalProperties": true
+    }
+  }
+}

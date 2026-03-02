@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://probity.dev/schemas/identity-object.schema.json",
+  "title": "Identity Object (identity-object:v1)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["actor_id", "actor_type"],
+  "properties": {
+    "actor_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "actor_type": {
+      "type": "string",
+      "enum": ["human", "service", "agent", "delegated"]
+    },
+    "provenance": {
+      "type": "object",
+      "description": "Optional structured metadata describing identity origin.",
+      "additionalProperties": true
+    },
+    "revocation_state": {
+      "type": "string",
+      "enum": ["active", "revoked", "unknown"]
+    },
+    "extensions": {
+      "$ref": "#/$defs/extensions"
+    }
+  },
+  "$defs": {
+    "extensions": {
+      "type": "object",
+      "description": "Namespaced extension container.",
+      "propertyNames": { "pattern": "^[A-Za-z0-9_]+(\\.[A-Za-z0-9_]+)+$" },
+      "additionalProperties": true
+    }
+  }
+}

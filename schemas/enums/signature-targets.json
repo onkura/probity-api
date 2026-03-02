@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://probity.dev/schemas/enums/signature-targets.json",
+  "title": "Signature Target Enumeration",
+  "type": "string",
+  "enum": ["snapshot_bytes", "snapshot_digest"],
+  "description": "What a signature covers in Probity v1."
+}

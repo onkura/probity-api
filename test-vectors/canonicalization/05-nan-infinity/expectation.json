@@ -1,0 +1,6 @@
+{
+  "canonical_serialization_id": "jcs:rfc8785",
+  "case": "non_finite_numbers",
+  "expect": "error",
+  "error_reason": "invalid_number_format"
+}

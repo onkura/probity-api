@@ -1,0 +1,55 @@
+{
+  "record_id": "urn:probity:record:66a4cf4d-7464-42bb-9d0c-6c124c9b62fb",
+  "spec_version": "probity-v1",
+  "encoding_id": "probity-json:v1",
+  "schema_version": "decision-snapshot:v1",
+  "canonical_serialization_id": "jcs:rfc8785",
+  "created_at": "2026-03-02T14:10:00Z",
+  "evidence_quality": "late",
+  "integrity": {
+    "hash_algo": "sha256",
+    "hash_encoding": "hex",
+    "digest": "3333333333333333333333333333333333333333333333333333333333333333",
+    "canonical_serialization_id": "jcs:rfc8785"
+  },
+  "snapshot": {
+    "perception": {
+      "inputs": [
+        {
+          "type": "webhook",
+          "source": "monitoring",
+          "event_id": "evt-91c3"
+        }
+      ]
+    },
+    "responsibility": {
+      "actor_id": "agent:late-capture-bot",
+      "actor_type": "agent",
+      "authority_scope": {
+        "role": "ops-bot",
+        "allowed_actions": ["create_ticket"]
+      }
+    },
+    "intent": {
+      "action_type": "create_ticket",
+      "action_params": {
+        "project": "OPS",
+        "title": "Follow up on alert evt-91c3 (late evidence capture)",
+        "priority": "P3"
+      }
+    },
+    "selection_basis": {
+      "policy_refs": ["urn:policy:ops/create-ticket:v1"]
+    },
+    "outcome": {
+      "observed_result": "succeeded",
+      "result_refs": ["urn:ticket:OPS-18422"],
+      "observed_at": "2026-03-02T14:02:10Z"
+    },
+    "extensions": {
+      "com.probity.example": {
+        "late_reason": "Recorder offline; reconstructed from downstream ticket id."
+      }
+    }
+  }
+}

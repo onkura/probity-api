@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://probity.dev/schemas/enums/verification-reasons.json",
+  "title": "Verification Reason Tokens",
+  "type": "string",
+  "enum": [
+    "invalid_json",
+    "missing_envelope_fields",
+    "snapshot_unresolvable",
+    "snapshot_ref_hash_mismatch",
+    "unknown_canonical_id",
+    "unsupported_hash_algo",
+    "unsupported_hash_encoding",
+    "integrity_mismatch",
+    "signature_key_unknown",
+    "signature_invalid",
+    "missing_snapshot_fields"
+  ],
+  "description": "Canonical reason tokens for verifier output (Probity v1). Implementations may add namespaced reasons."
+}

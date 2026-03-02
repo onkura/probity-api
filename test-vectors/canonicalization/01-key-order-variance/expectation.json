@@ -1,0 +1,5 @@
+{
+  "canonical_serialization_id": "jcs:rfc8785",
+  "case": "key_order_variance",
+  "expect": "canonical_equal"
+}

@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://probity.dev/schemas/lineage-link.schema.json",
+  "title": "Lineage Link (lineage-link:v1)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["parent_record_id", "relation_type"],
+  "properties": {
+    "parent_record_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "relation_type": {
+      "type": "string",
+      "enum": ["influenced_by", "derived_from", "approved_by", "forked_from"]
+    },
+    "context": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "evidence_ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "extensions": {
+      "$ref": "#/$defs/extensions"
+    }
+  },
+  "$defs": {
+    "extensions": {
+      "type": "object",
+      "propertyNames": { "pattern": "^[A-Za-z0-9_]+(\\.[A-Za-z0-9_]+)+$" },
+      "additionalProperties": true
+    }
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "record_id": "urn:probity:record:7c8d3c3a-5b25-4c9c-9a6a-6416f6f4d8b2",
+  "spec_version": "probity-v1",
+  "encoding_id": "probity-json:v1",
+  "schema_version": "decision-snapshot:v1",
+  "canonical_serialization_id": "jcs:rfc8785",
+  "created_at": "2026-03-02T14:01:12Z",
+  "evidence_quality": "unverified",
+  "integrity": {
+    "hash_algo": "sha256",
+    "hash_encoding": "hex",
+    "digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "canonical_serialization_id": "jcs:rfc8785"
+  },
+  "snapshot": {
+    "perception": {},
+    "responsibility": {
+      "actor_id": "svc:agent-runner",
+      "actor_type": "service",
+      "authority_scope": {
+        "role": "demo",
+        "can_commit_external_actions": true
+      }
+    },
+    "intent": {
+      "action_type": "noop",
+      "action_params": {
+        "reason": "minimal example"
+      }
+    },
+    "selection_basis": {
+      "heuristic_tags": ["example"]
+    },
+    "outcome": {
+      "observed_result": "unknown",
+      "result_refs": ["urn:example:noop"],
+      "observed_at": "2026-03-02T14:01:12Z"
+    }
+  }
+}

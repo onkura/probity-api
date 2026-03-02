@@ -1,0 +1,17 @@
+{
+  "record_id": "tv-02",
+  "verification_time": "1970-01-01T00:00:00Z",
+  "status": "invalid",
+  "status_reasons": [
+    "integrity_mismatch"
+  ],
+  "canonical_serialization_id": "jcs:rfc8785",
+  "integrity": {
+    "hash_algo": "sha256",
+    "hash_encoding": "hex",
+    "computed_digest": "343dd03af0a817ecc90a33c281367976fc335fec54bdf9c9561277a3c37cfa8a",
+    "expected_digest": "003dd03af0a817ecc90a33c281367976fc335fec54bdf9c9561277a3c37cfa8a",
+    "match": false
+  },
+  "evidence_quality": "verified"
+}

@@ -1,0 +1,53 @@
+{
+  "record_id": "tv-03",
+  "spec_version": "probity-v1",
+  "encoding_id": "probity-json:v1",
+  "schema_version": "decision-snapshot:v1",
+  "canonical_serialization_id": "jcs:rfc8785",
+  "created_at": "2026-03-02T00:00:00Z",
+  "evidence_quality": "verified",
+  "integrity": {
+    "hash_algo": "sha256",
+    "hash_encoding": "hex",
+    "digest": "343dd03af0a817ecc90a33c281367976fc335fec54bdf9c9561277a3c37cfa8a",
+    "canonical_serialization_id": "jcs:rfc8785"
+  },
+  "snapshot": {
+    "perception": {
+      "inputs": [
+        {
+          "type": "user_text",
+          "ref": "input:1"
+        }
+      ]
+    },
+    "responsibility": {
+      "actor_id": "agent:demo",
+      "actor_type": "agent",
+      "authority_scope": {
+        "allow": [
+          "purchase"
+        ]
+      }
+    },
+    "intent": {
+      "action_type": "purchase",
+      "action_params": {
+        "target": "item:123",
+        "qty": 1
+      }
+    },
+    "selection_basis": {
+      "heuristic_tags": [
+        "lowest_cost_within_policy"
+      ]
+    },
+    "outcome": {
+      "observed_result": "succeeded",
+      "result_refs": [
+        "order:abc123"
+      ],
+      "observed_at": "2026-03-02T00:00:01Z"
+    }
+  }
+}

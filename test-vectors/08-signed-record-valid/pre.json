@@ -1,0 +1,30 @@
+{
+  "record_id": "tv-08",
+  "spec_version": "probity-v1",
+  "encoding_id": "probity-json:v1",
+  "schema_version": "decision-snapshot:v1",
+  "canonical_serialization_id": "jcs:rfc8785",
+  "created_at": "2026-03-02T00:00:00Z",
+  "evidence_quality": "verified",
+  "integrity": {
+    "hash_algo": "sha256",
+    "hash_encoding": "hex",
+    "digest": "343dd03af0a817ecc90a33c281367976fc335fec54bdf9c9561277a3c37cfa8a",
+    "canonical_serialization_id": "jcs:rfc8785"
+  },
+  "snapshot_ref": {
+    "uri": "snapshot.json",
+    "content_hash": {
+      "hash_algo": "sha256",
+      "hash_encoding": "hex",
+      "digest": "ac506ee5b7533e4b3148035dcda87076de8de4d64bd087e640202b9c6686f2f7"
+    }
+  },
+  "signature": {
+    "signature_algo": "ed25519",
+    "signer_key_id": "signer:demo",
+    "target": "snapshot_bytes",
+    "signature_encoding": "base64url",
+    "signature": "7D13wxWD51U-VIH3_D0RHMJV-pem4ScEHWnd3vG2nfi8Scyl7o1i6k_MPy4awU_DwiL640bljdtss1ZzO0aMDw"
+  }
+}

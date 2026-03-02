@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://probity.dev/schemas/signature-object.schema.json",
+  "title": "Probity Signature Object",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["signature_algo", "signer_key_id", "target", "signature_encoding", "signature"],
+  "properties": {
+    "signature_algo": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Signature algorithm identifier (e.g., ed25519, rsa-pss-sha256)."
+    },
+    "signer_key_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Opaque identifier for signing key."
+    },
+    "target": {
+      "$ref": "https://probity.dev/schemas/enums/signature-targets.json"
+    },
+    "signature_encoding": {
+      "type": "string",
+      "enum": ["base64url", "hex"]
+    },
+    "signature": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "signature_encoding": { "const": "hex" } }, "required": ["signature_encoding"] },
+      "then": { "properties": { "signature": { "pattern": "^[0-9a-f]+$" } } }
+    },
+    {
+      "if": { "properties": { "signature_encoding": { "const": "base64url" } }, "required": ["signature_encoding"] },
+      "then": { "properties": { "signature": { "pattern": "^[A-Za-z0-9_-]+$" } } }
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+{
+  "public_key_file": "pubkey.ed25519.raw",
+  "public_key_format": "raw",
+  "signer_key_id": "signer:demo"
+}

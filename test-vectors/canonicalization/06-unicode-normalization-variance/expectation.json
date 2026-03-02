@@ -1,0 +1,5 @@
+{
+  "canonical_serialization_id": "jcs:rfc8785",
+  "case": "unicode_no_normalization",
+  "expect": "canonical_not_equal"
+}

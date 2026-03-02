@@ -1,0 +1,53 @@
+{
+  "record_id": "urn:probity:record:8d13e2a2-4bd1-46a6-8f7f-36d7b4c6b3c2",
+  "spec_version": "probity-v1",
+  "encoding_id": "probity-json:v1",
+  "schema_version": "decision-snapshot:v1",
+  "canonical_serialization_id": "jcs:rfc8785",
+  "created_at": "2026-03-02T14:31:00Z",
+  "evidence_quality": "unverified",
+  "integrity": {
+    "hash_algo": "sha256",
+    "hash_encoding": "hex",
+    "digest": "deadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeef",
+    "canonical_serialization_id": "jcs:rfc8785"
+  },
+  "snapshot": {
+    "perception": {
+      "inputs": [
+        {
+          "type": "user_message",
+          "content_ref": {
+            "hash_algo": "sha256",
+            "hash_encoding": "hex",
+            "digest": "6666666666666666666666666666666666666666666666666666666666666666"
+          }
+        }
+      ]
+    },
+    "responsibility": {
+      "actor_id": "agent:demo",
+      "actor_type": "agent",
+      "authority_scope": {
+        "role": "demo",
+        "allowed_actions": ["create_ticket"]
+      }
+    },
+    "intent": {
+      "action_type": "create_ticket",
+      "action_params": {
+        "project": "OPS",
+        "title": "This record demonstrates an integrity mismatch",
+        "priority": "P4"
+      }
+    },
+    "selection_basis": {
+      "heuristic_tags": ["example", "integrity_mismatch_demo"]
+    },
+    "outcome": {
+      "observed_result": "unknown",
+      "result_refs": ["urn:example:pending"],
+      "observed_at": "2026-03-02T14:31:00Z"
+    }
+  }
+}

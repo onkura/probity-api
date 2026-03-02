@@ -1,0 +1,5 @@
+{
+  "canonical_serialization_id": "jcs:rfc8785",
+  "case": "escape_forms",
+  "expect": "canonical_equal"
+}

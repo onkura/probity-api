@@ -1,0 +1,91 @@
+{
+  "record_id": "urn:probity:record:2f2d6a5c-ec8f-4b12-9a13-ef1652d0fd76",
+  "spec_version": "probity-v1",
+  "encoding_id": "probity-json:v1",
+  "schema_version": "decision-snapshot:v1",
+  "canonical_serialization_id": "jcs:rfc8785",
+  "created_at": "2026-03-02T14:09:30Z",
+  "evidence_quality": "verified",
+  "integrity": {
+    "hash_algo": "sha256",
+    "hash_encoding": "hex",
+    "digest": "0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f",
+    "canonical_serialization_id": "jcs:rfc8785"
+  },
+  "signature": {
+    "signature_algo": "ed25519",
+    "signer_key_id": "kms:key:prod/probity-signing",
+    "target": "snapshot_digest",
+    "signature_encoding": "base64url",
+    "signature": "Q1JZUFRPR1JBUEhJQy1QTkctU0lHTkFUVVJFLUVYQU1QTEU"
+  },
+  "snapshot": {
+    "perception": {
+      "inputs": [
+        {
+          "type": "user_message",
+          "content_ref": {
+            "hash_algo": "sha256",
+            "hash_encoding": "hex",
+            "digest": "1111111111111111111111111111111111111111111111111111111111111111"
+          }
+        }
+      ],
+      "evidence_refs": [
+        {
+          "type": "retrieved_doc",
+          "uri": "urn:doc:handbook/v3",
+          "content_hash": {
+            "hash_algo": "sha256",
+            "hash_encoding": "hex",
+            "digest": "2222222222222222222222222222222222222222222222222222222222222222"
+          }
+        }
+      ],
+      "env": {
+        "deployment": "prod",
+        "region": "us-central-1"
+      }
+    },
+    "responsibility": {
+      "actor_id": "agent:simple-agent",
+      "actor_type": "agent",
+      "authority_scope": {
+        "role": "ops-bot",
+        "allowed_actions": ["create_ticket"],
+        "ticketing_project": "OPS"
+      }
+    },
+    "intent": {
+      "action_type": "create_ticket",
+      "action_params": {
+        "project": "OPS",
+        "title": "Investigate elevated error rate",
+        "priority": "P2"
+      }
+    },
+    "selection_basis": {
+      "policy_refs": ["urn:policy:ops/create-ticket:v1"],
+      "heuristic_tags": ["error_rate", "pager_context"],
+      "score_signals": {
+        "confidence": 0.83,
+        "urgency": 0.61
+      }
+    },
+    "outcome": {
+      "observed_result": "succeeded",
+      "result_refs": ["urn:ticket:OPS-18421"],
+      "observed_at": "2026-03-02T14:09:31Z"
+    },
+    "extensions": {
+      "com.probity.example": {
+        "note": "Demonstrates a typical embedded snapshot with signature over digest."
+      }
+    }
+  },
+  "extensions": {
+    "com.probity.example": {
+      "trace_id": "trace-7f3d9c7a0b0f4a4d"
+    }
+  }
+}
