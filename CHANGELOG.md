@@ -6,6 +6,48 @@ The format follows a simple release log with compatibility notes.
 
 ---
 
+## [0.3.0] — 2026-03-03 — Full Open Source Product (Phase C)
+
+This release completes Stage C of the open source roadmap:
+Probity is now both a verifiable protocol and a usable capture + inspection toolchain.
+
+### Added
+
+- Python Capture SDK
+  - `record_action`
+  - `LocalJSONLRecorder`
+  - `RotatingFileRecorder`
+  - Snapshot builder helpers
+  - Deterministic integrity generation (JCS + SHA-256)
+- CLI Viewer (`probity-view`)
+  - Timeline view for JSONL logs
+  - Record expansion
+  - Offline integrity verification wrapper
+  - Export bundle (PRE + snapshot + canonical + verifier output)
+- Thin adapters:
+  - OpenAI Chat Completions
+  - Anthropic Messages
+- Quickstart guide
+
+### Guarantees
+
+An engineer can now:
+
+1. Install SDK
+2. Record LLM decisions
+3. View decision timeline
+4. Verify integrity offline
+5. Export portable bundles
+
+No hosted services required.
+
+### Compatibility
+
+- No changes to protocol invariants.
+- Fully compatible with `probity-json:v1`.
+
+---
+
 ## [0.2.0] — 2026-03-02 — Verifiable Standard (Phase B)
 
 This release transitions Probity from a conceptual specification

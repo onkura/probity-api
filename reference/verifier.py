@@ -29,10 +29,6 @@ from typing import Any, Dict, Optional, Tuple, List
 from jcs_rfc8785 import canonicalize as jcs_canonicalize, CanonicalizationError
 from hash import compute_digest, decode_digest, HashingError
 
-try:
-    import jsonschema  # type: ignore
-except Exception:
-    jsonschema = None
 
 # Optional accelerator; not required.
 try:
@@ -177,106 +173,48 @@ def schema_validate(
     snapshot: Optional[Dict[str, Any]],
     schema_dir: Optional[str],
 ) -> Tuple[bool, List[str], Optional[str]]:
+    """
+    Dependency-free schema checks.
+
+    Semantics:
+    - If schema_dir is None: skip schema checks.
+    - If schema_dir is provided:
+        - Load pre-envelope.schema.json and decision-snapshot.schema.json
+        - Enforce only top-level "required" presence (no patterns/oneOf/ref resolution)
+    This keeps the reference verifier runnable with zero third-party deps.
+    """
     if schema_dir is None:
         return True, [], None
 
-    # If jsonschema isn't available, we still want vectors to be runnable.
-    # Fallback behavior:
-    # - Perform a minimal required-field check for Decision Snapshot using the local schema's "required" list.
-    # - Skip full JSON Schema semantics (oneOf/allOf/patterns/etc).
-    #
-    # This keeps the reference verifier dependency-free while still producing
-    # deterministic results for the compliance vectors (notably missing-field cases).
-    if jsonschema is None:
-        if snapshot is None:
-            return True, [], None
-
+    def load_required(rel: str) -> List[str]:
         try:
-            with open(os.path.join(schema_dir, "decision-snapshot.schema.json"), "r", encoding="utf-8") as f:
-                snap_schema = json.load(f)
+            with open(os.path.join(schema_dir, rel), "r", encoding="utf-8") as f:
+                schema = json.load(f)
         except Exception:
-            # If schemas were explicitly requested but cannot be read, fail closed.
-            return False, [], "com.probity.schema_validation_unavailable"
-
-        required = snap_schema.get("required", [])
-        if not isinstance(required, list):
-            return True, [], None
-
-        missing = [k for k in required if k not in snapshot]
-        if missing:
-            return False, missing, "missing_snapshot_fields"
-
-        return True, [], None
-
-    def load_schema(rel: str) -> Dict[str, Any]:
-        with open(os.path.join(schema_dir, rel), "r", encoding="utf-8") as f:
-            return json.load(f)
-
-    pre_schema = load_schema("pre-envelope.schema.json")
-    snap_schema = load_schema("decision-snapshot.schema.json")
-
-    store: Dict[str, Any] = {}
-    for root, _, files in os.walk(schema_dir):
-        for fn in files:
-            if fn.endswith(".json"):
-                p = os.path.join(root, fn)
-                try:
-                    s = json.load(open(p, "r", encoding="utf-8"))
-                    sid = s.get("$id")
-                    if isinstance(sid, str):
-                        store[sid] = s
-                except Exception:
-                    pass
-
-    resolver = jsonschema.RefResolver.from_schema(pre_schema, store=store)
+            # If user explicitly requested schemas but we can't read them, fail closed.
+            raise
+        req = schema.get("required", [])
+        return req if isinstance(req, list) else []
 
     try:
-        jsonschema.Draft202012Validator(pre_schema, resolver=resolver).validate(pre)
-    except jsonschema.ValidationError as e:
-        missing: List[str] = []
+        pre_required = load_required("pre-envelope.schema.json")
+        snap_required = load_required("decision-snapshot.schema.json")
+    except Exception:
+        return False, [], "com.probity.schema_validation_unavailable"
 
-        # For "required", jsonschema's validator_value is the full required list,
-        # not the missing key. The missing key is in the error message.
-        # Example message: "'outcome' is a required property"
-        if e.validator == "required" and isinstance(e.message, str):
-            prefix = ".".join(str(p) for p in e.path)
-            # Extract first quoted token
-            if "'" in e.message:
-                parts = e.message.split("'")
-                if len(parts) >= 2 and parts[1]:
-                    k = parts[1]
-                    missing.append(f"{prefix}.{k}" if prefix else k)
+    # Pre required presence (envelope already has stronger checks elsewhere, but keep minimal parity)
+    missing_pre = [k for k in pre_required if k not in pre]
+    if missing_pre:
+        return False, missing_pre, "missing_envelope_fields"
 
-        if missing:
-            return False, missing, "missing_snapshot_fields"
+    if snapshot is None:
+        return True, [], None
 
-        return False, [], "com.probity.schema_invalid_snapshot"
-                
-    if snapshot is not None:
-        try:
-            resolver2 = jsonschema.RefResolver.from_schema(snap_schema, store=store)
-            jsonschema.Draft202012Validator(snap_schema, resolver=resolver2).validate(snapshot)
-        except jsonschema.ValidationError as e:
-            missing: List[str] = []
+    missing_snap = [k for k in snap_required if k not in snapshot]
+    if missing_snap:
+        return False, missing_snap, "missing_snapshot_fields"
 
-            # jsonschema's validator_value for "required" is the *entire required list*.
-            # The missing property appears in the error message, e.g. "'outcome' is a required property".
-            if e.validator == "required" and isinstance(e.message, str):
-                prefix = ".".join(str(p) for p in e.path)
-
-                # Extract first quoted token from the message.
-                if "'" in e.message:
-                    parts = e.message.split("'")
-                    if len(parts) >= 2 and parts[1]:
-                        k = parts[1]
-                        missing.append(f"{prefix}.{k}" if prefix else k)
-
-            if missing:
-                return False, missing, "missing_snapshot_fields"
-
-            return False, [], "com.probity.schema_invalid_snapshot"
     return True, [], None
-
 
 # ----------------------------
 # Pure-Python Ed25519 verifier

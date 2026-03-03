@@ -1,0 +1,20 @@
+# probity-view
+
+Offline CLI viewer for Probity Record Envelopes (PREs).
+
+Capabilities:
+- timeline view for JSONL logs
+- record expansion (pretty print)
+- integrity verification (wraps reference verifier)
+- export bundle (pre/snapshot/canonical/verifier output)
+
+Install (editable from repo root):
+```bash
+pip install -e sdk/python
+pip install -e cli/probity-view
+```
+## Examples
+probity-view timeline probity.jsonl
+probity-view show probity.jsonl --record-id pre-...
+probity-view verify test-vectors/01-basic-verified/pre.json --base-dir test-vectors/01-basic-verified --schemas schemas
+probity-view export probity.jsonl --record-id pre-... --out-dir bundle/

@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "probity"
+version = "0.3.0"
+description = "Probity Capture SDK (Python) — produce tamper-evident decision records (PRE)"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [{ name = "Probity Project" }]
+license = { text = "Apache-2.0" }
+
+[tool.setuptools]
+package-dir = {"" = "."}
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["probity*"]

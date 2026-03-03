@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "probity-view"
+version = "0.3.0"
+description = "Probity CLI viewer — timeline, expand, verify, export bundles"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "probity", # from sdk/python (install editable from repo)
+]
+
+[project.scripts]
+probity-view = "probity_view.__main__:main"
+
+[tool.setuptools]
+package-dir = {"" = "."}
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["probity_view*"]
